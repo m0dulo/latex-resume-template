@@ -11,8 +11,9 @@
 \RequirePackage{xifthen}
 \RequirePackage{titlesec}
 \RequirePackage{enumitem}
-\RequirePackage{fontawesome} 
-\RequirePackage{hyperref} 
+\RequirePackage{fontawesome}
+\RequirePackage{hyperref}
+\RequirePackage{graphicx} 
 
 % ============================================================================
 % 基本设置
@@ -25,9 +26,19 @@
 \setlist[enumerate]{topsep=0.25em, leftmargin=1.5pc}
 
 % ============================================================================
-% 头部信息命令定义
+% 照片功能相关定义
 % ============================================================================
 \makeatletter
+\def\@photopath{}
+\newlength{\@photowidth}
+\setlength{\@photowidth}{2.5cm}
+\newlength{\@photospacing}
+\setlength{\@photospacing}{0.5em}
+\newcommand{\photo}[1]{\def\@photopath{#1}}
+
+% ============================================================================
+% 头部信息命令定义
+% ============================================================================
 \def\@contactWeChat{}
 \def\@contactEmail{}
 \def\@contactGithub{}
@@ -42,25 +53,56 @@
     \def\@contactGender{#5}
 }
 
-
-\renewcommand{\@printContactInfo}{
+% --- 内部命令：打印存储的联系信息 (无照片) ---
+\newcommand{\@printContactInfo}{
+  \ifx\@contactEmail\@empty\else
    \centerline{
      \sffamily\large{
-       \ifthenelse{\isempty{\@contactWeChat}}{}{{\color{resumeblue}\faWeixin}~{\rmfamily{\@contactWeChat}}\quad} % Added icon
-       \ifthenelse{\isempty{\@contactEmail}}{}{{\color{resumeblue}\faEnvelopeO}~{\rmfamily{\@contactEmail}}\quad} % Added icon
-       \ifthenelse{\isempty{\@contactGithub}}{}{{\color{resumeblue}\faGithub}~\href{https://github.com/\@contactGithub}{\rmfamily{github.com/\@contactGithub}}\quad} % Added icon & link
-       \ifthenelse{\isempty{\@contactEnglish}}{}{{\color{resumeblue}\faLanguage}~{\rmfamily{\@contactEnglish}}\quad} % Added icon
-       \ifthenelse{\isempty{\@contactGender}}{}{{\color{resumeblue}\faUser}~{\rmfamily{\@contactGender}}} % Added icon
+       \ifthenelse{\isempty{\@contactWeChat}}{}{{\color{resumeblue}\faWeixin}~{\rmfamily{\@contactWeChat}}\quad}
+       \ifthenelse{\isempty{\@contactEmail}}{}{{\color{resumeblue}\faEnvelopeO}~{\rmfamily{\@contactEmail}}\quad}
+       \ifthenelse{\isempty{\@contactGithub}}{}{{\color{resumeblue}\faGithub}~\href{https://github.com/\@contactGithub}{\rmfamily{github.com/\@contactGithub}}\quad}
+       \ifthenelse{\isempty{\@contactEnglish}}{}{{\color{resumeblue}\faLanguage}~{\rmfamily{\@contactEnglish}}\quad}
+       \ifthenelse{\isempty{\@contactGender}}{}{{\color{resumeblue}\faUser}~{\rmfamily{\@contactGender}}}
      }
    }
   \fi
 }
 
-% --- 姓名命令 ---
+% --- 打印带图标的联系信息 (有照片s) --
+\newcommand{\@printContactInfoForPhoto}{
+  \ifthenelse{\isempty{\@contactWeChat} \AND \isempty{\@contactEmail} \AND \isempty{\@contactGithub} \AND \isempty{\@contactEnglish}}{
+  }{
+      \sffamily\normalsize{ 
+        \ifthenelse{\isempty{\@contactWeChat}}{}{{\color{resumeblue}\faWeixin}~{\rmfamily{\@contactWeChat}}\quad}
+        \ifthenelse{\isempty{\@contactEmail}}{}{{\color{resumeblue}\faEnvelopeO}~{\rmfamily{\@contactEmail}}\quad}
+        \ifthenelse{\isempty{\@contactGithub}}{}{{\color{resumeblue}\faGithub}~\href{https://github.com/\@contactGithub}{\rmfamily{github.com/\@contactGithub}}\quad}
+        \ifthenelse{\isempty{\@contactEnglish}}{}{{\color{resumeblue}\faLanguage}~{\rmfamily{\@contactEnglish}}}
+      }
+  }
+}
+
+% --- 姓名命令: 优化布局 ---
 \renewcommand{\name}[1]{
+  \ifx\@photopath\@empty % ========== 条件：没有照片 ==========
       \centerline{\huge\textbf{#1}}
       \vspace{1.5ex}
-      \@printContactInfo 
+      \@printContactInfo % 调用原始居中图标打印函数
+  \else % ========== 条件：有照片 ==========
+      % 创建两栏布局
+      \begin{minipage}[c]{\dimexpr\textwidth-\@photowidth-\@photospacing\relax}
+          % 左栏：姓名和联系信息
+          \vspace{3ex} % 姓名顶部增加边距
+          {\raggedright\huge\textbf{#1}\par}
+          \vspace{6ex} % 姓名与联系信息之间的间距
+          \raggedright\@printContactInfoForPhoto % 调用优化版带图标联系信息
+      \end{minipage}%
+      \hfill%
+      \begin{minipage}[c]{\@photowidth}
+          % 右栏：照片，垂直居中对齐
+          \raggedleft\includegraphics[width=\@photowidth]{\@photopath}
+      \end{minipage}
+  \fi
+  % --- 整个头部区域后的间距 ---
   \vspace{1ex}
 }
 \makeatother
@@ -78,7 +120,7 @@
 \titlespacing*{\subsection}{0cm}{*1}{*0.5}
 
 % ============================================================================
-% 其他实用命令定义
+% 其他命令
 % ============================================================================
 \newcommand{\datedsubsection}[3]{
   \subsection[#1]{#1 \hfill #2 \hfill #3}
