@@ -6,20 +6,22 @@
 % 所需包导入
 % ============================================================================
 \RequirePackage{xltxtra}
-\RequirePackage{fontspec}
-\RequirePackage[usenames,dvipsnames]{xcolor}
 \RequirePackage{xifthen}
+\RequirePackage{fontawesome}
+\RequirePackage[usenames,dvipsnames]{xcolor}
+\RequirePackage{fontspec}
 \RequirePackage{titlesec}
 \RequirePackage{enumitem}
-\RequirePackage{fontawesome}
 \RequirePackage{hyperref}
-\RequirePackage{graphicx} 
+\RequirePackage{graphicx}
+\RequirePackage{calc}
 
 % ============================================================================
 % 基本设置
 % ============================================================================
 \setlength{\parindent}{0pt}
 \definecolor{resumeblue}{RGB}{0, 86, 179}
+\setmainfont[SmallCapsFont = Fontin-SmallCaps]{TeX Gyre Termes} 
 \RequirePackage[a4paper, left=0.558in, right=0.558in, top=0.218in, bottom=0.218in, nohead, nofoot]{geometry}
 \setlist{noitemsep}
 \setlist[itemize]{topsep=0.25em, leftmargin=1.5pc}
@@ -45,7 +47,7 @@
 \def\@contactEnglish{}
 \def\@contactGender{}
 
-\newcommand{\contactInfo}[5]{
+\renewcommand{\contactInfo}[5]{ 
     \def\@contactWeChat{#1}
     \def\@contactEmail{#2}
     \def\@contactGithub{#3}
@@ -53,22 +55,22 @@
     \def\@contactGender{#5}
 }
 
-% --- 内部命令：打印存储的联系信息 (无照片) ---
-\newcommand{\@printContactInfo}{
+% --- 内部命令：打印存储的联系信息 (无照片版本) ---
+\newcommand{\@printContactInfo}{%
   \ifx\@contactEmail\@empty\else
-   \centerline{
+   \centerline{%
      \sffamily\large{
        \ifthenelse{\isempty{\@contactWeChat}}{}{{\color{resumeblue}\faWeixin}~{\rmfamily{\@contactWeChat}}\quad}
        \ifthenelse{\isempty{\@contactEmail}}{}{{\color{resumeblue}\faEnvelopeO}~{\rmfamily{\@contactEmail}}\quad}
        \ifthenelse{\isempty{\@contactGithub}}{}{{\color{resumeblue}\faGithub}~\href{https://github.com/\@contactGithub}{\rmfamily{github.com/\@contactGithub}}\quad}
        \ifthenelse{\isempty{\@contactEnglish}}{}{{\color{resumeblue}\faLanguage}~{\rmfamily{\@contactEnglish}}\quad}
        \ifthenelse{\isempty{\@contactGender}}{}{{\color{resumeblue}\faUser}~{\rmfamily{\@contactGender}}}
-     }
-   }
+     }%
+   }%
   \fi
 }
 
-% --- 打印带图标的联系信息 (有照片s) --
+% --- 打印带图标的联系信息 (有照片) --
 \newcommand{\@printContactInfoForPhoto}{
   \ifthenelse{\isempty{\@contactWeChat} \AND \isempty{\@contactEmail} \AND \isempty{\@contactGithub} \AND \isempty{\@contactEnglish}}{
   }{
@@ -80,6 +82,7 @@
       }
   }
 }
+
 
 % --- 姓名命令: 优化布局 ---
 \renewcommand{\name}[1]{
@@ -105,7 +108,7 @@
   % --- 整个头部区域后的间距 ---
   \vspace{1ex}
 }
-\makeatother
+\makeatother 
 
 % ============================================================================
 % 标题与段落格式
@@ -120,13 +123,26 @@
 \titlespacing*{\subsection}{0cm}{*1}{*0.5}
 
 % ============================================================================
-% 其他命令
+% 其他实用命令定义
 % ============================================================================
-\newcommand{\datedsubsection}[3]{
+\renewcommand{\datedsubsection}[3]{ 
   \subsection[#1]{#1 \hfill #2 \hfill #3}
 }
 \newcommand{\datedline}[2]{
   {\par #1 \hfill #2 \par}
+}
+\newcommand{\objective}[2]{ 
+  \centerline{
+    \sffamily\large{
+      {\color{resumeblue}\faLaptop}\hspace{0.5em}\textbf{求职意向：}{#1}
+      \quad
+      \ifthenelse{\isempty{#2}}{}{
+        {\color{resumeblue}\faHourglassHalf}\hspace{0.5em}\textbf{实习时长：}{\textit{#2}}
+      }
+    }
+  }
+  \vspace{1ex}
+  \rmfamily
 }
 
 % ============================================================================

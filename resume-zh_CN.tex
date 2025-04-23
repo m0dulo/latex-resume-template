@@ -4,14 +4,16 @@
 \documentclass{resume} 
 
 % ============================================================================
-% 本文档所需包 
+% 本文档所需包
 % ============================================================================
-% \usepackage{zh_CN-Adobefonts_external} 
+\usepackage{zh_CN-Adobefonts_external} 
+%\usepackage{zh_CN-Adobefonts_internal}
+\usepackage{linespacing_fix} 
 
 % ============================================================================
 % 可选：设置照片
 % ============================================================================
-%\photo{photo.png} % <--- 通过这里控制是否显示照片
+\photo{photo.png} 
 
 % ============================================================================
 % 文档开始
@@ -28,6 +30,9 @@
 
 % --- 再定义姓名 ---
 \name{姓~名}
+
+% --- 求职意向 (可选) ---
+% \objective{目标职位}{实习时长 (可选)} 
 
 % ============================================================================
 % 教育背景部分
@@ -72,37 +77,44 @@
 % 专业技能部分
 % ============================================================================
 \section{\faWrench\ 专业技能 (Skills)}
-\begin{itemize}
-    \item \textbf{编程语言:} C++, Python, JavaScript, Java, ...
-    \item \textbf{框架与库:} TensorFlow, PyTorch, React, ...
-    \item \textbf{工具 (Tools):} Git, Docker, Linux, ...
+\begin{itemize}[parsep=0.2ex] % Adjusted parsep
+    \item \textbf{编程语言:} C++, Python, JavaScript, Java, Rust, Go, SQL, ... % Expanded list slightly
+    \item \textbf{框架与库:} TensorFlow, PyTorch, MLIR, LLVM, TensorRT, React, Vue, Spring Boot, ... % Expanded list
+    \item \textbf{工具 (Tools):} Git, Docker, Kubernetes, CMake, Linux, Nsight, Perf, ... % Expanded list
+    % \item \textbf{语言 (Languages):} 中文 (母语), 英语 (IELTS: 6.5 / ...)
 \end{itemize}
 
 % ============================================================================
 % 荣誉奖项部分
 % ============================================================================
 \section{\faDiamond\ 荣誉奖项 (Honors & Awards)}
-\begin{itemize}
-  \item 示例奖项一 \hfill{获奖年份}
-  \item 示例奖项二 \hfill{获奖年份/地点}
+\begin{itemize}[parsep=0.2ex] % Adjusted parsep
+  \item 示例奖项一 (例如：国家奖学金) \hfill{获奖年份} 
+  \item 示例奖项二 (例如：某某竞赛一等奖) \hfill{获奖年份/地点} 
+  \item 示例其他荣誉 (例如：知名开源项目贡献者) 
+  \item 在此处继续添加其他条目...
 \end{itemize}
 
 % ============================================================================
 % 相关链接部分
 % ============================================================================
 \section{\faLink\ 相关链接 (Links)}
-\begin{itemize}
+\begin{itemize}[parsep=0.2ex] % Adjusted parsep
     \item \textit{技术博客 (Technical Blog):} \href{https://your-blog-url.com}{your-blog-url.com}
+    \item \textit{项目作品集 (Portfolio):} \href{https://your-portfolio-url.com}{your-portfolio-url.com} 
     % \item \textit{GitHub 主页:} \href{https://github.com/username}{github.com/username}
+    \item \textit{其他相关链接或说明...} 
 \end{itemize}
 
 % ============================================================================
 % 自我评价部分
 % ============================================================================
 \section{\faThumbsOUp\ 自我评价 (Summary)}
-\begin{itemize}
+\begin{itemize}[parsep=0.2ex] 
   \item 突出一个关键技术优势或专业领域。
-  \item 提及优秀的软技能。
+  \item 提及优秀的软技能，如团队合作、沟通或解决问题能力。 
+  \item 表达学习热情、对特定领域的兴趣或职业目标。 
+  \item 示例：学习能力强，具备优秀的分析能力，对某某领域充满热情。 
 \end{itemize}
 
 % ============================================================================
