@@ -9,8 +9,10 @@
 \RequirePackage{fontspec}
 \RequirePackage[usenames,dvipsnames]{xcolor}
 \RequirePackage{xifthen}
-\RequirePackage{titlesec} 
-\RequirePackage{enumitem} 
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{fontawesome} 
+\RequirePackage{hyperref} 
 
 % ============================================================================
 % 基本设置
@@ -18,7 +20,7 @@
 \setlength{\parindent}{0pt}
 \definecolor{resumeblue}{RGB}{0, 86, 179}
 \RequirePackage[a4paper, left=0.558in, right=0.558in, top=0.218in, bottom=0.218in, nohead, nofoot]{geometry}
-\setlist{noitemsep} % Basic list setting
+\setlist{noitemsep}
 \setlist[itemize]{topsep=0.25em, leftmargin=1.5pc}
 \setlist[enumerate]{topsep=0.25em, leftmargin=1.5pc}
 
@@ -40,18 +42,17 @@
     \def\@contactGender{#5}
 }
 
-% --- 内部命令：打印存储的联系信息 (简单文本版) ---
-\newcommand{\@printContactInfo}{%
-  \ifx\@contactEmail\@empty\else
-   \centerline{%
+
+\renewcommand{\@printContactInfo}{
+   \centerline{
      \sffamily\large{
-       \ifthenelse{\isempty{\@contactWeChat}}{}{{\rmfamily{\@contactWeChat}}\quad}
-       \ifthenelse{\isempty{\@contactEmail}}{}{{\rmfamily{\@contactEmail}}\quad}
-       \ifthenelse{\isempty{\@contactGithub}}{}{{\rmfamily{github.com/\@contactGithub}}\quad}
-       \ifthenelse{\isempty{\@contactEnglish}}{}{{\rmfamily{\@contactEnglish}}\quad}
-       \ifthenelse{\isempty{\@contactGender}}{}{{\rmfamily{\@contactGender}}}
-     }%
-   }%
+       \ifthenelse{\isempty{\@contactWeChat}}{}{{\color{resumeblue}\faWeixin}~{\rmfamily{\@contactWeChat}}\quad} % Added icon
+       \ifthenelse{\isempty{\@contactEmail}}{}{{\color{resumeblue}\faEnvelopeO}~{\rmfamily{\@contactEmail}}\quad} % Added icon
+       \ifthenelse{\isempty{\@contactGithub}}{}{{\color{resumeblue}\faGithub}~\href{https://github.com/\@contactGithub}{\rmfamily{github.com/\@contactGithub}}\quad} % Added icon & link
+       \ifthenelse{\isempty{\@contactEnglish}}{}{{\color{resumeblue}\faLanguage}~{\rmfamily{\@contactEnglish}}\quad} % Added icon
+       \ifthenelse{\isempty{\@contactGender}}{}{{\color{resumeblue}\faUser}~{\rmfamily{\@contactGender}}} % Added icon
+     }
+   }
   \fi
 }
 
@@ -59,7 +60,7 @@
 \renewcommand{\name}[1]{
       \centerline{\huge\textbf{#1}}
       \vspace{1.5ex}
-      \@printContactInfo % 调用打印函数
+      \@printContactInfo 
   \vspace{1ex}
 }
 \makeatother
