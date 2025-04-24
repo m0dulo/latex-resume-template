@@ -13,46 +13,52 @@
 % ============================================================================
 % 可选：设置照片
 % ============================================================================
-\photo{photo.png} 
+\photo{photo.png} % <--- 路径指向的照片文件，注释掉则无照片
 
 % ============================================================================
 % 文档开始
 % ============================================================================
 \begin{document}
-\pagenumbering{gobble}
+\pagenumbering{gobble} % 不显示页码
 
 % ============================================================================
 % 个人信息部分
 % ============================================================================
 % --- 先定义联系信息 ---
 \contactInfo
-{139-xxxx-xxxx}{youremail@email.com}{username}{IELTS: 6.5}{男}
+{139-1234-5678}{youremail@email.com}{username}{IELTS: 6.5}{男} 
+% 参数: {电话/微信}{邮箱}{GitHub/网站}{英语}{性别} 
 
 % --- 再定义姓名 ---
-\name{姓~名}
+\name{姓~名} 
 
 % --- 求职意向 (可选) ---
 % \objective{目标职位}{实习时长 (可选)} 
 
 % ============================================================================
-% 教育背景部分
+% 教育背景部分 
 % ============================================================================
-\section{\faGraduationCap\ 教育背景 (Education)}
-\noindent
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l l r @{}}
-    {\large \textbf{某某大学}} &
-    {\textbf{某某专业}} &
-    {\textit{学位与状态 (例如 硕士在读)}} &
-    {\textbf{预计毕业日期 (例如 202X.XX)}} \\
+\iconsection{\faGraduationCap}{教育背景}{EDUCATION} 
+\noindent 
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l l l r @{}} 
+    {\large \textbf{某某某大学}} & 
+    {\textbf{某某专业}} & 
+    {\textit{硕士研究生在读}} & 
+    {\textbf{预计毕业日期 (例如 202X.XX)}} \\ 
+
+    {\large \textbf{某某大学}} & 
+    {\textbf{某某专业}} & 
+    {\textit{工学学士}} & 
+    {\textbf{毕业日期 (例如 202X.XX)}} \\ 
 \end{tabular*}
 
 % ============================================================================
 % 研究经历部分
 % ============================================================================
-\section{\faFlask\ 研究经历 (Research)}
-\datedsubsection{\textbf{研究项目标题}}
-                 {关键技术栈 (例如 C++, Python)}
-                 {所属机构 / 背景 (例如 某某研究院)}
+\iconsection{\faFlask}{研究经历}{RESEARCH}
+\datedsubsection{\textbf{研究项目标题}} 
+                  {关键技术栈 (例如 C++, Python)} 
+                  {所属机构 / 背景 (例如 某某研究院)} 
 \begin{itemize}
     \item 描述研究背景、担任的角色以及解决的问题。
     \item 详细说明使用或开发的方法、技术或算法。
@@ -62,10 +68,10 @@
 % ============================================================================
 % 实习与项目经历部分
 % ============================================================================
-\section{\faCogs\ 实习与项目经历 (Experience)}
-\datedsubsection{\textbf{公司名称 | 部门 (或项目)}}
-                 {岗位名称 / 主要技术栈}
-                 {202X.XX - 202X.XX}
+\iconsection{\faCogs}{项目与实习经历}{EXPERIENCE}
+\datedsubsection{\textbf{公司名称 | 部门 (或项目)}} 
+                  {岗位名称 / 主要技术栈} 
+                  {202X.XX - 202X.XX} 
 \begin{itemize}
     \item 简要描述项目目标或团队目标。
     \item 详细说明具体职责和执行的任务。使用动作动词。
@@ -76,19 +82,18 @@
 % ============================================================================
 % 专业技能部分
 % ============================================================================
-\section{\faWrench\ 专业技能 (Skills)}
-\begin{itemize}[parsep=0.2ex] % Adjusted parsep
-    \item \textbf{编程语言:} C++, Python, JavaScript, Java, Rust, Go, SQL, ... % Expanded list slightly
-    \item \textbf{框架与库:} TensorFlow, PyTorch, MLIR, LLVM, TensorRT, React, Vue, Spring Boot, ... % Expanded list
-    \item \textbf{工具 (Tools):} Git, Docker, Kubernetes, CMake, Linux, Nsight, Perf, ... % Expanded list
-    % \item \textbf{语言 (Languages):} 中文 (母语), 英语 (IELTS: 6.5 / ...)
+\iconsection{\faWrench}{专业技能}{SKILLS}
+\begin{itemize}[parsep=0.2ex] 
+    \item \textbf{编程语言:} C++, Python, JavaScript, Java, Rust, Go, SQL, ...
+    \item \textbf{框架与库:} TensorFlow, PyTorch, MLIR, LLVM, TensorRT, React, Vue, Spring Boot, ...
+    \item \textbf{工具 (Tools):} Git, Docker, Kubernetes, CMake, Linux, Nsight, Perf, ...
 \end{itemize}
 
 % ============================================================================
 % 荣誉奖项部分
 % ============================================================================
-\section{\faDiamond\ 荣誉奖项 (Honors & Awards)}
-\begin{itemize}[parsep=0.2ex] % Adjusted parsep
+\iconsection{\faDiamond}{荣誉奖项}{HONORS \& AWARDS} % 注意 & 需要写为 \&
+\begin{itemize}[parsep=0.2ex]
   \item 示例奖项一 (例如：国家奖学金) \hfill{获奖年份} 
   \item 示例奖项二 (例如：某某竞赛一等奖) \hfill{获奖年份/地点} 
   \item 示例其他荣誉 (例如：知名开源项目贡献者) 
@@ -98,23 +103,22 @@
 % ============================================================================
 % 相关链接部分
 % ============================================================================
-\section{\faLink\ 相关链接 (Links)}
-\begin{itemize}[parsep=0.2ex] % Adjusted parsep
-    \item \textit{技术博客 (Technical Blog):} \href{https://your-blog-url.com}{your-blog-url.com}
-    \item \textit{项目作品集 (Portfolio):} \href{https://your-portfolio-url.com}{your-portfolio-url.com} 
-    % \item \textit{GitHub 主页:} \href{https://github.com/username}{github.com/username}
+\iconsection{\faLink}{相关链接}{LINKS} 
+\begin{itemize}[parsep=0.2ex]
+    \item \textit{技术博客 (Technical Blog):} \href{https://your-blog-url.com}{your-blog-url.com} 
+    \item \textit{项目作品集 (Portfolio):} \href{https://your-portfolio-url.com}{your-portfolio-url.com}
     \item \textit{其他相关链接或说明...} 
 \end{itemize}
 
 % ============================================================================
-% 自我评价部分
+% 自我评价部分 
 % ============================================================================
-\section{\faThumbsOUp\ 自我评价 (Summary)}
-\begin{itemize}[parsep=0.2ex] 
+\iconsection{\faThumbsOUp}{自我评价}{SUMMARY}
+\begin{itemize}[parsep=0.2ex]
   \item 突出一个关键技术优势或专业领域。
-  \item 提及优秀的软技能，如团队合作、沟通或解决问题能力。 
-  \item 表达学习热情、对特定领域的兴趣或职业目标。 
-  \item 示例：学习能力强，具备优秀的分析能力，对某某领域充满热情。 
+  \item 提及优秀的软技能，如团队合作、沟通或解决问题能力。
+  \item 表达学习热情、对特定领域的兴趣或职业目标。
+  \item 示例：学习能力强，具备优秀的分析能力，对某某领域充满热情。
 \end{itemize}
 
 % ============================================================================
